@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ping Pong</title>
+  <style>
+    /* Add some styling for the page here */
+  </style>
+</head>
+<body>
+  <canvas id="game-canvas" width="800" height="600"></canvas>
+  <script src="game.js">// Set up canvas
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set up ball
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+    let dx = 2;
+    let dy = 2;
+    let ballRadius = 10;
+    
+    // Set up paddles
+    const paddleHeight = 100;
+    const paddleWidth = 10;
+    let rightPaddleY = (canvas.height - paddleHeight) / 2;
+    let leftPaddleY = (canvas.height - paddleHeight) / 2;
+    
+    // Set up keys
+    let rightPaddleUp = false;
+    let rightPaddleDown = false;
+    let leftPaddleUp = false;
+    let leftPaddleDown = false;
+    
+    document.addEventListener("keydown", keyDownHandler);
+    document.addEventListener("keyup", keyUpHandler);
+    
+    function keyDownHandler(e) {
+      if (e.key == "Up" || e.key == "ArrowUp") {
+        rightPaddleUp = true;
+      }
+      else if (e.key == "Down" || e.key == "ArrowDown") {
+        rightPaddleDown = true;
+      }
+      if (e.key == "w") {
+        leftPaddleUp = true;
+      }
+      else if (e.key == "s") {
+        leftPaddleDown = true;
+      }
+    }
+    
+    function keyUpHandler(e) {
+      if (e.key == "Up" || e.key == "ArrowUp") {
+        rightPaddleUp = false;
+      }
+      else if (e.key == "Down" || e.key == "ArrowDown") {
+        rightPaddleDown = false;
+      }
+      if (e.key == "w") {
+        leftPaddleUp = false;
+      }
+      else if (e.key == "s") {
+        leftPaddleDown = false;
+      }
+    }
+    
+    // Set up scoring
+    let leftScore = 0;
+    let rightScore = 0;
+    
+    // Game loop
+    function draw() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+      // Draw ball
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+    }
+  </script>
+</body>
+</html>
